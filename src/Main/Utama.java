@@ -6,6 +6,7 @@
 package Main;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -24,18 +25,29 @@ public class Utama extends javax.swing.JFrame {
     /**
      * Creates new form Utama
      */
+    @SuppressWarnings("OverridableMethodCallInConstructor")
     public Utama() {
         initComponents();
         tabelawal();
         setLocationRelativeTo(null);
         setTitle("Tugas Bu Nafi - Kecerdasan Buatan - Hari Rabu");
-        update.disable();
+        update.setEnabled(false);
+        hapus.setEnabled(false);
+        simpan.setEnabled(true);
         
     }
     public void resik(){
         inputID.setText("");
         InputPIC.setText("");
         InputIQ.setText("");
+        InputPE.setSelectedIndex(0);
+        InputGender.setSelectedIndex(0);
+        InputCP.setSelectedIndex(0);
+        
+        //mengaktifkan tombol simpan
+        simpan.setEnabled(true);
+        update.setEnabled(false);
+        hapus.setEnabled(false);
     }
     public void tabelawal(){
         Object[] Judul = {"Nomer","Gender","Parent In Come","IQ", "Paren Encouraged","Collage Plans"};
@@ -63,6 +75,33 @@ public class Utama extends javax.swing.JFrame {
             }
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null,"Database Error"
+                    + "\nDengan pesan error : " + e.getMessage());
+        }
+    }
+    public void update(){
+        Connection konek = new koneksi().konek();
+        String sql = "update resiko_bisnis set gender= ?, parenincome = ?, iq = ?, parenincount = ?, collegplan = ? where id = '"+inputID.getText()+"'";
+        PreparedStatement stm = null;
+        try {
+            stm = konek.prepareStatement(sql);
+            
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null,"Database Error"
+                    + "\nDengan pesan error : " + e.getMessage());
+        }
+        try {
+            stm.setString(1, InputGender.getSelectedItem().toString());
+            stm.setString(2, InputPIC.getText());
+            stm.setString(3, InputIQ.getText());
+            stm.setString(4, InputPE.getSelectedItem().toString());
+            stm.setString(5, InputCP.getSelectedItem().toString());
+            stm.executeUpdate();
+            JOptionPane.showMessageDialog(null,"Data Berhasil diubah!");
+            resik();
+            tabelawal();
+            
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null,"Query SQL Error"
                     + "\nDengan pesan error : " + e.getMessage());
         }
     }
@@ -126,6 +165,16 @@ public class Utama extends javax.swing.JFrame {
 
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        jComboBox2 = new javax.swing.JComboBox<>();
+        jComboBox3 = new javax.swing.JComboBox<>();
+        jComboBox4 = new javax.swing.JComboBox<>();
+        hitung = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblBisnis = new javax.swing.JTable();
@@ -145,18 +194,84 @@ public class Utama extends javax.swing.JFrame {
         simpan = new javax.swing.JButton();
         update = new javax.swing.JButton();
         hapus = new javax.swing.JButton();
+        reset = new javax.swing.JButton();
+        Keluar = new javax.swing.JButton();
+        jPanel3 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        setName("menuutama"); // NOI18N
+        setResizable(false);
+
+        jLabel8.setText("Hitung Resiko Bisnis Dengan Metode Navy Bayes - Java");
+
+        jLabel9.setText("Gender ");
+
+        jLabel10.setText("Parent In Come");
+
+        jLabel11.setText("IQ");
+
+        jLabel12.setText("Paren Encouraged");
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        jComboBox4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        hitung.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/hitung.png"))); // NOI18N
+        hitung.setText("Hitung");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 751, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(hitung)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jLabel8)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel9)
+                                .addComponent(jLabel10)
+                                .addComponent(jLabel11)
+                                .addComponent(jLabel12))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jComboBox4, 0, 187, Short.MAX_VALUE)
+                                .addComponent(jComboBox3, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jComboBox2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                .addContainerGap(472, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 326, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel8)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel9)
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel10)
+                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel11)
+                    .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel12)
+                    .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(hitung)
+                .addContainerGap(138, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Menu Utama", jPanel1);
@@ -199,6 +314,7 @@ public class Utama extends javax.swing.JFrame {
 
         InputCP.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "No", "Yes" }));
 
+        simpan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/simpan.png"))); // NOI18N
         simpan.setText("Simpan");
         simpan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -206,6 +322,7 @@ public class Utama extends javax.swing.JFrame {
             }
         });
 
+        update.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/update.png"))); // NOI18N
         update.setText("Update");
         update.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -213,10 +330,27 @@ public class Utama extends javax.swing.JFrame {
             }
         });
 
+        hapus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/hapus.png"))); // NOI18N
         hapus.setText("Hapus");
         hapus.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 hapusActionPerformed(evt);
+            }
+        });
+
+        reset.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/reset.png"))); // NOI18N
+        reset.setText("Reset");
+        reset.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                resetActionPerformed(evt);
+            }
+        });
+
+        Keluar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/keluar.png"))); // NOI18N
+        Keluar.setText("Keluar");
+        Keluar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                KeluarActionPerformed(evt);
             }
         });
 
@@ -246,13 +380,18 @@ public class Utama extends javax.swing.JFrame {
                             .addComponent(inputID)
                             .addComponent(InputIQ)
                             .addComponent(InputPIC)))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(0, 21, Short.MAX_VALUE)
-                        .addComponent(hapus)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                .addComponent(hapus)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(update))
+                            .addComponent(Keluar, javax.swing.GroupLayout.Alignment.TRAILING))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(update)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(simpan)))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(reset, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(simpan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 491, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -293,12 +432,29 @@ public class Utama extends javax.swing.JFrame {
                             .addComponent(simpan)
                             .addComponent(update)
                             .addComponent(hapus))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(reset)
+                            .addComponent(Keluar))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 314, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
-        jTabbedPane1.addTab("Data Trainet", jPanel2);
+        jTabbedPane1.addTab("Data Trainer", jPanel2);
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 790, Short.MAX_VALUE)
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 326, Short.MAX_VALUE)
+        );
+
+        jTabbedPane1.addTab("Kelompok", jPanel3);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -306,7 +462,7 @@ public class Utama extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 753, Short.MAX_VALUE)
+                .addComponent(jTabbedPane1)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -347,16 +503,57 @@ public class Utama extends javax.swing.JFrame {
     }//GEN-LAST:event_hapusActionPerformed
 
     private void tblBisnisMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblBisnisMouseClicked
-       //saat pilih record
+        simpan.setEnabled(false);
+        update.setEnabled(true);
+        hapus.setEnabled(true);
+        //saat pilih record
         int baris = tblBisnis.getSelectedRow();
         String id = DftTabMode1.getValueAt(baris, 0).toString();
+        String gender = DftTabMode1.getValueAt(baris , 1).toString();
+        String pic = DftTabMode1.getValueAt(baris , 2).toString();
+        String iq = DftTabMode1.getValueAt(baris , 3).toString();
+        String pe = DftTabMode1.getValueAt(baris , 4).toString();
+        String cp = DftTabMode1.getValueAt(baris, 5).toString();
         
         inputID.setText(id);
+        InputPIC.setText(pic);
+        InputIQ.setText(iq);
+        
+        //selected item oleh data gender
+        String [] lk = {"male","female"};
+        for (int i = 0; i < lk.length; i++) {
+            if (gender.equalsIgnoreCase(lk[i])) {
+                InputGender.setSelectedIndex(i);
+            }
+        }
+        
+        //selected item oleh data paren encouraged
+        String [] parentE = {"Not Encouraged","Encouraged"};
+        for (int i = 0; i < parentE.length; i++) {
+            if (pe.equalsIgnoreCase(parentE[i])) {
+                InputPE.setSelectedIndex(i);
+            }
+        }
+        //selected item oleh data collage plan
+        String [] colege = {"no","yes"};
+        for (int i = 0; i < colege.length; i++) {
+            if (cp.equalsIgnoreCase(colege[i])) {
+                InputCP.setSelectedIndex(i);
+            }
+        }
     }//GEN-LAST:event_tblBisnisMouseClicked
 
     private void updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateActionPerformed
-        // TODO add your handling code here:
+        update();
     }//GEN-LAST:event_updateActionPerformed
+
+    private void resetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetActionPerformed
+        resik();
+    }//GEN-LAST:event_resetActionPerformed
+
+    private void KeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_KeluarActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_KeluarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -369,8 +566,9 @@ public class Utama extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("Windows".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    
                     break;
                 }
             }
@@ -399,19 +597,32 @@ public class Utama extends javax.swing.JFrame {
     private javax.swing.JTextField InputIQ;
     private javax.swing.JComboBox<String> InputPE;
     private javax.swing.JTextField InputPIC;
+    private javax.swing.JButton Keluar;
     private javax.swing.JButton hapus;
+    private javax.swing.JButton hitung;
     private javax.swing.JTextField inputID;
+    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> jComboBox2;
+    private javax.swing.JComboBox<String> jComboBox3;
+    private javax.swing.JComboBox<String> jComboBox4;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JButton reset;
     private javax.swing.JButton simpan;
     private javax.swing.JTable tblBisnis;
     private javax.swing.JButton update;
