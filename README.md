@@ -1,4 +1,5 @@
 # TugasAIRabu
+https://img.shields.io/badge/netbeans-8.2-orange.svg
 Merupakan tugas Kecerdasan buatan dengan menggunakan data trainer Resiko Bisnis dan menggunakan metode navy bayes dalam menghitung hasil dari prediksi resiko bisnis
 # Kelompok Terakhir
 1. Moch. Afif 111210277
