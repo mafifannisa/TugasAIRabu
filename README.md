@@ -9,3 +9,6 @@ Merupakan tugas Kecerdasan buatan dengan menggunakan data trainer Resiko Bisnis 
 ![alt text](https://github.com/mafifannisa/TugasAIRabu/raw/master/sc/1.PNG)
 # Screenshoot Update v.2 Program
 ![alt text](https://github.com/mafifannisa/TugasAIRabu/raw/master/sc/2.PNG)
+# Screenshoot Update v.3 Program
+![alt text](https://github.com/mafifannisa/TugasAIRabu/raw/master/sc/3.PNG)
+
