@@ -22,7 +22,7 @@ public class koneksi {
            Class.forName("org.sqlite.JDBC");
            //JOptionPane.showMessageDialog(null, "berhasil load driver");
        }catch(ClassNotFoundException ex){
-           JOptionPane.showMessageDialog(null, "Tidak ada Driver!\n" + ex);
+           JOptionPane.showMessageDialog(null, "Library Driver tidak ditemukan!\n" + ex,"Peringatan",JOptionPane.WARNING_MESSAGE);
        }
        
        //untuk koneksi ke database
@@ -30,10 +30,10 @@ public class koneksi {
            
            String url="jdbc:sqlite:C:\\Users\\Subayu\\Documents\\NetBeansProjects\\TugasAIRabu\\db\\datatrainer.sqlite";
            koneksdb=DriverManager.getConnection(url);
-           System.out.println("Berhasil koneksi");
+           System.out.println("Log : Database Berhasil terkoneksi");
        }catch(SQLException se){
-           System.out.println("Gagal koneksi "+se);
-           JOptionPane.showMessageDialog(null,"Gagal Koneksi Database","Peringatan",JOptionPane.WARNING_MESSAGE);
+           System.out.println("Log : Gagal koneksi "+se);
+           JOptionPane.showMessageDialog(null,"Gagal Teroneksi ke Database","Peringatan",JOptionPane.WARNING_MESSAGE);
        }
        return koneksdb;
     }
