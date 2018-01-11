@@ -140,30 +140,30 @@ public class NaviBayes {
                genderYes = genderYes + 1;
            }
            //Hipotesa IQ No
-           int iq2 = Integer.parseInt(IQ)+10;
-           String query3 = "SELECT iq FROM resiko_bisnis where collegplan = 'No' and iq >= '"+ IQ +"' and iq <= '"+ iq2 +"';";
+           
+           String query3 = "SELECT iq FROM resiko_bisnis where collegplan = 'No' and iq = '"+ IQ +"' ;";
            Statement stm3 = konek.createStatement();
            ResultSet hasil3 = stm3.executeQuery(query3);
            while (hasil3.next()) {               
                IQNo = IQNo + 1;
            }
            //Hipotesa IQ Yes
-           String query4 = "SELECT iq FROM resiko_bisnis where collegplan = 'Yes' and iq >= '"+ IQ +"' and iq <= '"+ iq2 +"';";
+           String query4 = "SELECT iq FROM resiko_bisnis where collegplan = 'Yes' and iq = '"+ IQ +"' ;";
            Statement stm4 = konek.createStatement();
            ResultSet hasil4 = stm4.executeQuery(query4);
            while (hasil4.next()) {               
                IQYes = IQYes + 1;
            }
            //Hipotesa PIC No
-           int pic2 = Integer.parseInt(PIC)+10000;
-           String query5 = "SELECT parenincome FROM resiko_bisnis where collegplan = 'No' and parenincome >= '"+ PIC +"' and parenincome <= '"+ pic2 +"';";
+           
+           String query5 = "SELECT parenincome FROM resiko_bisnis where collegplan = 'No' and parenincome = '"+ PIC +"' ;";
            Statement stm5 = konek.createStatement();
            ResultSet hasil5 = stm5.executeQuery(query5);
            while (hasil5.next()) {               
                PICNo = PICNo + 1;
            }
            //Hipotesa PIC Yes
-           String query6 = "SELECT parenincome FROM resiko_bisnis where collegplan = 'Yes' and parenincome >= '"+ PIC +"' and parenincome <= '"+ pic2 +"';";
+           String query6 = "SELECT parenincome FROM resiko_bisnis where collegplan = 'Yes' and parenincome = '"+ PIC +"' ;";
            Statement stm6 = konek.createStatement();
            ResultSet hasil6 = stm6.executeQuery(query6);
            while (hasil6.next()) {               

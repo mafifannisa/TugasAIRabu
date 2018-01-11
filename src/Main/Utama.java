@@ -47,8 +47,8 @@ public class Utama extends javax.swing.JFrame {
     }
     public void hitung(){
         String gender = genderbox.getSelectedItem().toString();
-        String pic = picbox.getSelectedItem().toString();
-        String iq = iqbox.getSelectedItem().toString();
+        String pic = PICin.getText();
+        String iq = IQin.getText();
         String pe = pebox.getSelectedItem().toString();
         NaviBayes nv = new NaviBayes();
         nv.setGender(gender);
@@ -88,6 +88,8 @@ public class Utama extends javax.swing.JFrame {
             hipotesa.setText("Membandingkan Nilai Hipotesa no dengan \nHipotesa Yes, hasilnya adalah besar hipotesa yes \nDengan Nilai "+yes+"\nSehingga Hipotesa Terakhir adalah Ya");
         }else if (notot>yestot) {
             hipotesa.setText("Membandingkan Nilai Hipotesa no dengan \nHipotesa Yes, hasilnya adalah besar hipotesa no \nDengan Nilai "+no+"\nSehingga Hipotesa Terakhir adalah No");
+        }else{
+            hipotesa.setText("Jika Kondisional kedua Nol maka tidak bisa di Simpulkan Hipotesanya");
         }
     }
     public void resik(){
@@ -107,13 +109,13 @@ public class Utama extends javax.swing.JFrame {
         genderbox.setSelectedIndex(0);
         genderno.setText("0");
         genderyes.setText("0");
-        picbox.setSelectedIndex(0);
-        picno.setText("0");
+        PICin.setText("0");
+        picno.setText("");
         picyes.setText("0");
         pebox.setSelectedIndex(0);
         peno.setText("0");
         peyes.setText("0");
-        iqbox.setSelectedIndex(0);
+        IQin.setText("");
         iqno.setText("0");
         iqyes.setText("0");
     }
@@ -239,8 +241,6 @@ public class Utama extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         genderbox = new javax.swing.JComboBox<>();
-        picbox = new javax.swing.JComboBox<>();
-        iqbox = new javax.swing.JComboBox<>();
         pebox = new javax.swing.JComboBox<>();
         hitung = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
@@ -268,9 +268,9 @@ public class Utama extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         hipotesa = new javax.swing.JTextArea();
         jLabel31 = new javax.swing.JLabel();
-        jLabel21 = new javax.swing.JLabel();
-        jLabel22 = new javax.swing.JLabel();
         ResetDepan = new javax.swing.JButton();
+        PICin = new javax.swing.JTextField();
+        IQin = new javax.swing.JTextField();
         pagemenu2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblBisnis = new javax.swing.JTable();
@@ -326,10 +326,6 @@ public class Utama extends javax.swing.JFrame {
         jLabel12.setText("Paren Encouraged");
 
         genderbox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Male", "Female" }));
-
-        picbox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "10000", "20000", "30000", "40000", "50000", "60000" }));
-
-        iqbox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "60", "70", "80", "90", "100", "110", "120", "130" }));
 
         pebox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Not Encouraged", "Encouraged" }));
 
@@ -477,12 +473,6 @@ public class Utama extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jLabel21.setFont(new java.awt.Font("Dialog", 1, 8)); // NOI18N
-        jLabel21.setText("Kisaran");
-
-        jLabel22.setFont(new java.awt.Font("Dialog", 1, 8)); // NOI18N
-        jLabel22.setText("Kisaran");
-
         ResetDepan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/reset.png"))); // NOI18N
         ResetDepan.setText("Reset");
         ResetDepan.addActionListener(new java.awt.event.ActionListener() {
@@ -513,14 +503,10 @@ public class Utama extends javax.swing.JFrame {
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(pagemenu1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(pebox, 0, 187, Short.MAX_VALUE)
-                                .addComponent(iqbox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(picbox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(genderbox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pagemenu1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel21)
-                    .addComponent(jLabel22))
-                .addGap(28, 28, 28)
+                                .addComponent(genderbox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(PICin)
+                                .addComponent(IQin)))))
+                .addGap(62, 62, 62)
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
@@ -538,13 +524,11 @@ public class Utama extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(pagemenu1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel10)
-                            .addComponent(picbox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel21))
+                            .addComponent(PICin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(pagemenu1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel11)
-                            .addComponent(iqbox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel22))
+                            .addComponent(IQin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(pagemenu1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel12)
@@ -553,7 +537,7 @@ public class Utama extends javax.swing.JFrame {
                         .addGroup(pagemenu1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(hitung)
                             .addComponent(ResetDepan))
-                        .addGap(0, 139, Short.MAX_VALUE))
+                        .addGap(0, 143, Short.MAX_VALUE))
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -973,12 +957,14 @@ public class Utama extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel HYes;
     private javax.swing.JLabel Hno;
+    private javax.swing.JTextField IQin;
     private javax.swing.JComboBox<String> InputCP;
     private javax.swing.JComboBox<String> InputGender;
     private javax.swing.JTextField InputIQ;
     private javax.swing.JComboBox<String> InputPE;
     private javax.swing.JTextField InputPIC;
     private javax.swing.JButton Keluar;
+    private javax.swing.JTextField PICin;
     private javax.swing.JButton ResetDepan;
     private javax.swing.JComboBox<String> genderbox;
     private javax.swing.JLabel genderno;
@@ -989,7 +975,6 @@ public class Utama extends javax.swing.JFrame {
     private javax.swing.JLabel hkno;
     private javax.swing.JLabel hkyes;
     private javax.swing.JTextField inputID;
-    private javax.swing.JComboBox<String> iqbox;
     private javax.swing.JLabel iqno;
     private javax.swing.JLabel iqyes;
     private javax.swing.JLabel jLabel1;
@@ -1005,8 +990,6 @@ public class Utama extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
-    private javax.swing.JLabel jLabel21;
-    private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
@@ -1042,7 +1025,6 @@ public class Utama extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> pebox;
     private javax.swing.JLabel peno;
     private javax.swing.JLabel peyes;
-    private javax.swing.JComboBox<String> picbox;
     private javax.swing.JLabel picno;
     private javax.swing.JLabel picyes;
     private javax.swing.JButton reset;

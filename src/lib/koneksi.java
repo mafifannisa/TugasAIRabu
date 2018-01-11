@@ -5,6 +5,7 @@
  */
 package lib;
 
+import java.io.File;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -27,8 +28,8 @@ public class koneksi {
        
        //untuk koneksi ke database
        try{
-           
-           String url="jdbc:sqlite:C:\\Users\\Subayu\\Documents\\NetBeansProjects\\TugasAIRabu\\db\\datatrainer.sqlite";
+           File temp = new File(".");
+           String url="jdbc:sqlite:"+ temp.getAbsolutePath()+"\\db\\datatrainer.sqlite";
            koneksdb=DriverManager.getConnection(url);
            System.out.println("Log : Database Berhasil terkoneksi");
        }catch(SQLException se){
